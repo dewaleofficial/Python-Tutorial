@@ -1,3 +1,5 @@
+#class is a template definition of the method s and variable s in a particular kind of object .
+# Thus, an object is a specific instance of a class
 import turtle
 
 class Polygon:
