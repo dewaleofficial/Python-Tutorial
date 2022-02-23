@@ -1,5 +1,10 @@
+import csv
+
 class items():
     
+    #create a list of items for all stores
+    all=[]
+
     pay_rate = 0.8 #class/global attribute(discount of 20% across all sales)
 
 
@@ -15,7 +20,11 @@ class items():
         self.price=price
         self.quantity = quantity
         self.withInk = withInk
-        
+
+        #everytime an instance is created we want to append to the list
+        #it should be in the init function because the init function is called once the class is loaded
+    
+        items.all.append(self)        
 
     def calculate_total_price(self):
         return self.price*self.quantity
@@ -24,14 +33,57 @@ class items():
         self.price = self.price*self.pay_rate
         return self.price
 
+    #create a class method to connect to csv and instantiate some objects
+    @classmethod
+    def instanciate_from_csv(cls):
+        with open('items.csv', 'r') as f:
+            reader = csv.DictReader(f)
+            itemly = list(reader)
+
+        for item in itemly:
+            items(
+                store=item.get('store'),
+                name=item.get('name'),
+                price=item.get('price'),
+                quantity=item.get('quantity'),
+                withInk=item.get('withInk')
+            )
 
 
-item1 = items("ade_book_store", "ade", 100, 10)
-item2 = items("olx", "pencil", 200, 10, True )
+    #static method
+    @staticmethod
+    def isnumber(num):#can take any argument
+    # we want to count out the float that are point 0 i.e 5.0, 10.0
+        if isinstance(num,float):
+            return num.is_integer()
+        elif isinstance(num,int):
+            return True
+        else:
+            return False
 
-item1.withtitle = "New book"
 
-item1.pay_rate = 0.7
+    #allows you vew your instances an an object
+    def __repr__(self):
+        return f"items('{self.store}', '{self.name}','{self.price}', '{self.quantity}', '{self.withInk}')"
+
+
+#item1 = items("aliexpress", "book", 100, 10)
+#item2 = items("olx", "pencil", 200, 10 )
+#tem3 = items("jumia", "pen", 300, 10, True )
+#item4 = items("amazon", "ruler", 400, 10 )
+#item5 = items("konga", "eraser", 500, 10  )
+
+#print all the instances of all
+#print(items.all)
+
+#lets print all the names of the store
+#for instance in items.all:
+#    print (instance.store)
+
+
+#item1.withtitle = "New book"
+
+#item1.pay_rate = 0.7
 
 #print(item1.name)
 
@@ -46,8 +98,9 @@ item1.pay_rate = 0.7
 
 #to view all attributes associated with an object
 #print(item1.__dict__)
-#
-print(item1.apply_discount())
+#print(item1.apply_discount())
 #item1.apply_discount()
 #print(item1.price)
 
+items.instanciate_from_csv()
+print(items.all)
