@@ -1,0 +1,6 @@
+store, name, price, quantity, withInk
+"aliexpress", "book", 100, 10, false
+"olx", "pencil", 200, 10, false
+"jumia", "pen", 300, 10, true
+"amazon", "ruler", 400, 10, false
+"konga", "eraser", 500, 10, false
