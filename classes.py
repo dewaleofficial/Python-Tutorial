@@ -1,10 +1,13 @@
+#import classes for reference
 from all_items import items
 from phones import Phone
 
+#declare a phone instance
 phone1 = Phone("olx", "samsung", 100, 20)
 
 phone2 = Phone("jumia", "infinix", 80, 20)
 
+#print new price(after discount) for instance phone2
 #print(phone2.apply_discount())
 
 item1 = items("olx", "samsung", 100, 20)
