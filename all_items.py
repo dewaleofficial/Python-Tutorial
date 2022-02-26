@@ -2,7 +2,7 @@ import csv
 
 class items():
     
-    #create a list of items for all stores
+    #create an empty list of items for all stores
     all=[]
 
     pay_rate = 0.8 #class/global attribute(discount of 20% across all sales)
@@ -26,14 +26,15 @@ class items():
         #it should be in the init function because the init function is called once the class is loaded
     
         items.all.append(self)        
-
+    #encapsulation. denyng access from external source
     @property
     #read-only attribute
     def name(self):
         print("you are trying to get name")
+        #__ makes it private
         return self.__name
 
-# set new nvalue for name
+# set new value for name
     @name.setter
     def name(self, value):
         if len(value)>10:
@@ -41,11 +42,12 @@ class items():
         else:
             self.__name = value
 
-#lets enapsulate the price attribute
+#lets encapsulate the price attribute
     @property
     def price(self):
         return self.__price
 
+#get total price of all tems chosen
     def calculate_total_price(self):
         return self.__price*self.quantity
 
@@ -88,8 +90,9 @@ class items():
 
 #ABSTRACTION  - Show only important attribute and hide unnecessary information
 #make the methods private and unaccessible outside this class 
-    def __connect(self, smpt_server):
+    def __connect(self):
         pass
+        
 
     def __prepare_body(self):
         return f"""
@@ -100,6 +103,6 @@ class items():
         pass
 
     def send_email(self):
-        self.__conect()
+        self.__connect()
         self.__prepare_body()
         self.__send()
